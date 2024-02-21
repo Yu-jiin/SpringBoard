@@ -44,10 +44,35 @@
 	<!-- DataSource : DB연결(CP) -->
 	
 	
+	<!-- 서비스 객체 주입 -->
+	<context:component-scan base-package="com.itwillbs.service"/>
+	<!-- 서비스 객체 주입 -->
 	
 	
+	<!-- SqlSessionFactory : DB연결, SQL실행, Mybatis, Mapper 설정 -->
+	<bean id="sqlSessionFactory" 
+		  class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" 
+				  value="classpath:/mybatis-config.xml"/>
+		<property name="mapperLocations"
+				  value="classpath:/mappers/**/*Mapper.xml"/>
+	</bean>
+	<!-- SqlSessionFactory : DB연결, SQL실행, Mybatis, Mapper 설정 끝 -->
 	
 	
+	<!-- SqlSessionTemplate : DB연결(자동), 자원해제, SQL실행, Mybatis, Mapper 설정 -->
+	<bean id="sqlSession"
+		  class="org.mybatis.spring.SqlSessionTemplate" 
+		  destroy-method="clearCache">
+		  <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<!-- SqlSessionTemplate : DB연결(자동), 자원해제, SQL실행, Mybatis, Mapper 설정 끝 -->
+	
+	
+	<!-- com.itwillbs.persistence패키지에 컴포넌트(객체)를 찾기 -->
+	<context:component-scan base-package="com.itwillbs.persistence" />
+	<!-- com.itwillbs.persistence패키지에 컴포넌트(객체)를 찾기 끝 -->
 	
 	
 	
