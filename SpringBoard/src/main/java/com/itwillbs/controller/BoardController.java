@@ -43,8 +43,11 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	
-	
+	// 리스트 GET : /board/list
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void listGET() throws Exception{
+		logger.debug(" listGET() 호출 ");
+	}
 	
 	
 	
