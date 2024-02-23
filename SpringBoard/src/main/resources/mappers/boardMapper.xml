@@ -11,7 +11,9 @@
   	</insert>
   	
   	
-  	
+  	<select id="selectBoardList" resultType="BoardVO">
+  		select * from tbl_board order by regdate desc
+  	</select>
   	
   	
   	
