@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -59,6 +60,20 @@ public class BoardController {
 	}
 	
 	
+	// 본문읽기 GET : /board/read?bno=?
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void readGET(int bno, Model model) throws Exception{ // @RequestParam, @ModelAttribute 가능 
+		// @ModelAttribute : 파라메터 저장 + 영역저장 (1:N관계)
+		// @RequestParam : 파라메터 저장 (1:1관계)
+		logger.debug(" readGET() 호출 ");
+		// 전달정보 저장
+		logger.debug(" bno : " +bno);
+		// 서비스 - DAO 게시판 글 정보 조회 동작\
+		BoardVO vo = bService.read(bno);
+		// 해당정보 저장 -> 연결된 뷰 페이지로 전달
+		model.addAttribute("vo", vo);
+		// 뷰 페이지로 이동 
+	}
 	
 	
 	

@@ -16,4 +16,7 @@ public interface BoardService {
 	// 글 리스트 동작
 	public List<BoardVO> getList() throws Exception;
 	
+	// 글 정보 조회 동작
+	public BoardVO read(int bno) throws Exception;
+	
 }
