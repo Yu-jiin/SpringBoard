@@ -3,7 +3,14 @@
 
 
 <%@ include file="../include/header.jsp" %>
+
+
+<div class="content">
 <br>
+	<h1>read.jsp</h1>
+	<form role="form" action="" method="get">
+		<input type="hidden" name="bno" value="${vo.bno }">
+	</form>
 
 <div class="box box-primary">
 	<div class="box-header with-border">
@@ -33,12 +40,17 @@
 		</div>
 	
 </div>
-
+</div>
 
 <!-- JQuery-->
 <!-- JQuery 라이브러리 추가 (include/header.jsp) -->
 <script>
 	$(document).ready(function(){
+		
+		// bno를 저장하는 폼테그 정보 
+		var formObj = $("form[role='form']");
+		
+		
 		//alert("Test"); TEST라는 알림창을 띄움 
 		// 목록으로 버튼 클릭시
 		$(".btn-success").click(function(){
@@ -48,10 +60,11 @@
 		});
 		
 		// 수정하기 버튼 클릭시
-		${".btn-danger"}.click(function(){
+		$(".btn-danger").click(function(){
 			alert("글 수정하기");
-			location.href="/board/rewrite"
-		})
+			formObj.attr("action", "/board/modify");
+			formObj.submit();
+		});
 		
 	});
 </script>

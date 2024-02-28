@@ -47,4 +47,10 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update(NAMESPACE+".updateViewcnt", bno);
 	}
 
+	@Override
+	public void boardUpdate(BoardVO vo) throws Exception {
+		logger.debug(" boardUpdate -> mapper 호출 ");
+		sqlSession.update(NAMESPACE+".updateBoard",vo);
+	}
+
 }

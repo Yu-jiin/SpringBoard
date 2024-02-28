@@ -22,7 +22,8 @@ public interface BoardDAO {
 	//글 조회수 1증가
 	public void boardViewcntUpdate(int bno) throws Exception;
 	
-	
+	//글수정
+	public void boardUpdate(BoardVO vo) throws Exception;
 	
 	
 	

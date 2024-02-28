@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.BoardVO;
 import com.itwillbs.service.BoardService;
@@ -82,7 +83,7 @@ public class BoardController {
 			session.setAttribute("viewUpdateStatus", 0);
 		}
 		
-		// 서비스 - DAO 게시판 글 정보 조회 동작\
+		// 서비스 - DAO 게시판 글 정보 조회 동작
 		BoardVO vo = bService.read(bno);
 		// 해당정보 저장 -> 연결된 뷰 페이지로 전달
 		model.addAttribute("vo", vo);
@@ -90,8 +91,27 @@ public class BoardController {
 	}
 	
 	
-	// 본문수정 GET
+	// 본문수정 GET /board/modify?bno=??
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void modifyGET(@RequestParam("bno") int bno, Model model) throws Exception{
+		logger.debug(" modifyGET() 실행 @@@@@@@@@@@@ ");
+		logger.debug(" bno : "+bno);
+		// 서비스 -> DAO 특정 글 정보 조회 동작
+		model.addAttribute(bService.read(bno));
+		// 연결된 뷰 페이지에 전달
+	}
 	
+	
+	// 본문수정 POST 
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPOST(BoardVO vo) throws Exception{
+		logger.debug(" modifyPOST() 실행 @@@@@@@@@@@@ ");
+		logger.debug(" BoardVO : "+vo);
+		// 서비스 -> DAO 
+		bService.modify(vo);
+		// 수정 완료 후 list로 이동 redirect
+		return "redirect:/board/list";
+	}
 	
 	
 	
