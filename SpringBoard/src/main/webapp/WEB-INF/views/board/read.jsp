@@ -47,10 +47,11 @@
 			location.href="/board/list";
 		});
 		
-		/* ${".btn-danger"}.click(function(){
+		// 수정하기 버튼 클릭시
+		${".btn-danger"}.click(function(){
 			alert("글 수정하기");
 			location.href="/board/rewrite"
-		}) */
+		})
 		
 	});
 </script>
