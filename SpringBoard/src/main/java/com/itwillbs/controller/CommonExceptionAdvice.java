@@ -19,7 +19,6 @@ public class CommonExceptionAdvice {
 	public String commons(Exception e, Model model) {
 		logger.debug(" @@@@@@@@@@@@@ 예외 발생 @@@@@@@@@@@@");
 		logger.debug(" e : " + e);
-		
 		model.addAttribute("e", e);
 		return "commons";
 	}
