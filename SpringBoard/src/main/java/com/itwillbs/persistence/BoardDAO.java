@@ -25,7 +25,8 @@ public interface BoardDAO {
 	//글수정
 	public void boardUpdate(BoardVO vo) throws Exception;
 	
-	
+	//글 삭제
+	public void boardDelete(BoardVO vo) throws Exception;
 	
 	
 	

@@ -25,7 +25,8 @@ public interface BoardService {
 	// 글 수정 동작
 	public void modify(BoardVO vo) throws Exception;
 	
-	
+	// 글 삭제 동작
+	public void remove(BoardVO vo) throws Exception;
 	
 	
 	

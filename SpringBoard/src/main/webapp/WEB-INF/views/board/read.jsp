@@ -66,6 +66,13 @@
 			formObj.submit();
 		});
 		
+		// 삭제하기 버튼 클릭시
+		$(".btn-warning").click(function(){
+			alert("글 삭제 !");
+			formObj.attr("action", "/board/remove");
+			formObj.submit();
+		});
+		
 	});
 </script>
 

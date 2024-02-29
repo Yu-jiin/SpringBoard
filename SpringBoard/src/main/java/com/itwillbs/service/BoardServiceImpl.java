@@ -51,6 +51,12 @@ public class BoardServiceImpl implements BoardService{
 		bdao.boardUpdate(vo);
 	}
 
+	@Override
+	public void remove(BoardVO vo) throws Exception {
+		logger.debug(" remove(BoardVO vo) 실행 ");
+		bdao.boardDelete(vo);
+	}
+
 	
 
 }
