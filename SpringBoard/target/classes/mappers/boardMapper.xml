@@ -46,7 +46,7 @@
   	
   	<!-- 글 삭제 -->
   	<delete id="deleteBoard">
-  		delete * from tbl_board
+  		delete from tbl_board
   		where bno=#{bno}
   	</delete>
   	

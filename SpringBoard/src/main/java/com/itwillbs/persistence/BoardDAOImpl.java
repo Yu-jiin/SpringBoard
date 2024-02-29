@@ -54,9 +54,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void boardDelete(BoardVO vo) throws Exception {
+	public void boardDelete(int bno) throws Exception {
 		logger.debug(" boardDelete(BoardVO vo) 실행 ");
-		sqlSession.delete(NAMESPACE+".deleteBoard", vo);
+		sqlSession.delete(NAMESPACE+".deleteBoard", bno);
 	}
 
 }

@@ -117,10 +117,9 @@ public class BoardController {
 	
 	// 본문삭제 POST
 	@RequestMapping(value = "/remove", method =  RequestMethod.POST)
-	public String removePOST(BoardVO vo) throws Exception{
+	public String removePOST(BoardVO vo,@RequestParam("bno") int bno) throws Exception{
 		logger.debug(" removePOST(BoardVO vo) 실행 ");
-		logger.debug(" BoardVO : "+vo);
-		bService.remove(vo);
+		bService.remove(bno);
 		return "redirect:/board/list";
 	}
 	

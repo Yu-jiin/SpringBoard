@@ -70,6 +70,7 @@
 		$(".btn-warning").click(function(){
 			alert("글 삭제 !");
 			formObj.attr("action", "/board/remove");
+			formObj.attr("method","post");
 			formObj.submit();
 		});
 		

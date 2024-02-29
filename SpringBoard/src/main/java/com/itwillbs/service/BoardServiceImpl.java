@@ -52,9 +52,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void remove(BoardVO vo) throws Exception {
+	public void remove(int bno) throws Exception {
 		logger.debug(" remove(BoardVO vo) 실행 ");
-		bdao.boardDelete(vo);
+		bdao.boardDelete(bno);
 	}
 
 	
