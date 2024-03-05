@@ -56,20 +56,20 @@
 		$(".btn-success").click(function(){
 			alert("목록으로");
 			// 목록으로 이동하기
-			location.href="/board/list";
+			location.href="/board/listCri?page=${cri.page}&pageSize=${param.pageSize}";
 		});
 		
 		// 수정하기 버튼 클릭시
 		$(".btn-danger").click(function(){
 			alert("글 수정하기");
-			formObj.attr("action", "/board/modify");
+			formObj.attr("action", "/board/modify?page=${cri.page}&pageSize=${param.pageSize}");
 			formObj.submit();
 		});
 		
 		// 삭제하기 버튼 클릭시
 		$(".btn-warning").click(function(){
 			alert("글 삭제 !");
-			formObj.attr("action", "/board/remove");
+			formObj.attr("action", "/board/remove?page=${cri.page}&pageSize=${param.pageSize}");
 			formObj.attr("method","post");
 			formObj.submit();
 		});

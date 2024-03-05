@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.service.BoardService;
 
 @Controller
@@ -47,7 +48,7 @@ public class BoardController {
 		bService.regist(vo);
 		logger.debug(" 글쓰기 완료 ! >> list.jsp로 이동 ");
 		// 페이지 이동(list)
-		return "redirect:/board/list";
+		return "redirect:/board/listCri";
 	}
 	
 	// http://localhost:8088/board/list
@@ -66,9 +67,9 @@ public class BoardController {
 	}
 	
 	
-	// 본문읽기 GET : /board/read?bno=?
+	// 본문읽기 GET : /board/read?bno=?&page=?&pageSize=?
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void readGET(int bno, Model model, HttpSession session) throws Exception{ // @RequestParam, @ModelAttribute 가능 
+	public void readGET(int bno, Model model, HttpSession session,Criteria cri) throws Exception{ // @RequestParam, @ModelAttribute 가능 
 		// @ModelAttribute : 파라메터 저장 + 영역저장 (1:N관계)
 		// @RequestParam : 파라메터 저장 (1:1관계)
 		logger.debug(" readGET() 호출 ");
@@ -87,6 +88,7 @@ public class BoardController {
 		BoardVO vo = bService.read(bno);
 		// 해당정보 저장 -> 연결된 뷰 페이지로 전달
 		model.addAttribute("vo", vo);
+		model.addAttribute("cri", cri); // 뷰 페이지로 페이징처리 정보 전달
 		// 뷰 페이지로 이동 
 	}
 	
@@ -110,7 +112,7 @@ public class BoardController {
 		// 서비스 -> DAO 
 		bService.modify(vo);
 		// 수정 완료 후 list로 이동 redirect
-		return "redirect:/board/list";
+		return "redirect:/board/listCri";
 	}
 	
 	
@@ -123,8 +125,31 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	
-	
+	// http://localhost:8088/board/listCri
+	// http://localhost:8088/board/listCri?page=2&pageSize=20
+	// 리스트 GET : /board/listCri
+		@RequestMapping(value = "/listCri", method = RequestMethod.GET)
+		public void listCriGET(Model model, HttpSession session,Criteria cri) throws Exception{
+			logger.debug(" listCriGET() 호출 ");
+			
+			// 페이징처리 객체
+		/*
+		 * Criteria cri = new Criteria(); 
+		 * cri.setPageSize(20); // 글 20개씩 보기
+		 */			
+			// 서비스 -> DAO 게시판 글 목록 가져오기 
+			// List<BoardVO> boardList = bService.getList(); 전체 목록 부르기
+			List<BoardVO> boardList = bService.getListCri(cri); // 페이징 처리 목록 
+			
+			
+			logger.debug(" list.size : "+boardList.size());
+			// 연결된 뷰 페이지에 정보 전달 (Model)
+			model.addAttribute("boardList",boardList);
+			model.addAttribute("cri", cri);
+			
+			// 조회수 상태 0 : 조회수 증가X / 1 : 조회수 증가O 
+			session.setAttribute("viewUpdateStatus", 1);
+		}
 	
 	
 	
