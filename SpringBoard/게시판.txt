@@ -126,11 +126,27 @@
 	
 	
 	* 페이징처리 하단 블럭 
+		- 끝 페이지 번호 (endPage)
+			(int)(Math.ceil(page/페이지 블럭 수) * 페이지 블럭 수)
+		- 시작페이지 번호 
+			(endPage - 페이지 블럭 수) + 1
+		- 전체 글 개수(totalCount)
+		
+		- 이전으로 이동(prev)
+			startPage == 1 ? false : true
+			startPage != 1 ? true : false
+		- 다음으로 이동(next)
+			endPage * pageSize >= totalCount ? false : true
+			endPage * pageSize < totalCount ? 
 	
-	
-	
-	
-	
+	Q. 한 페이지에 10개씩 출력, 총 122개 
+	   page번호 : 3 일때 startPage , endPage , prev , next 값을 구해라
+	   endPage = 10, startPage = 1, prev = F, next = T 
+	   page번호 : 10일때 startPage, endPage, prev, next 값 구하기
+	   endPage = 10, startPage = 1, prev = F, next = T 
+	   page번호 : 11일때 startPage, endPage, prev, next 값 구하기
+	   endPage = 20, startPage = 10, prev = T, next = 
+		
 	
 	
 	

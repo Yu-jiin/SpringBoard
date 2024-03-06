@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.service.BoardService;
 
 @Controller
@@ -142,6 +143,10 @@ public class BoardController {
 		 * Criteria cri = new Criteria(); 
 		 * cri.setPageSize(20); // 글 20개씩 보기
 		 */			
+			PageVO pageVO = new PageVO();
+			pageVO.setCri(cri);
+			pageVO.setTotalCount(10234);
+			
 			// 서비스 -> DAO 게시판 글 목록 가져오기 
 			// List<BoardVO> boardList = bService.getList(); 전체 목록 부르기
 			List<BoardVO> boardList = bService.getListCri(cri); // 페이징 처리 목록 
@@ -151,7 +156,7 @@ public class BoardController {
 			// 연결된 뷰 페이지에 정보 전달 (Model)
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("cri", cri);
-			
+			model.addAttribute("pageVO", pageVO);
 			// 조회수 상태 0 : 조회수 증가X / 1 : 조회수 증가O 
 			session.setAttribute("viewUpdateStatus", 1);
 		}
