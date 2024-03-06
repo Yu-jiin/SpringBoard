@@ -71,7 +71,10 @@
   		]]>
   	</select>  	
   	
-  	
+  	<!-- 전체 글 계산 -->
+  	<select id="totalCount" resultType="int">
+  		select count(bno) from tbl_board;
+  	</select>
   	
   	
   	

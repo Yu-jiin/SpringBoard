@@ -76,5 +76,10 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList(NAMESPACE+".selectBoardListCri", cri);
 	}
 
+	@Override
+	public int boardListCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".totalCount");
+	}
+
 
 }

@@ -32,6 +32,7 @@ public interface BoardService {
 	// 페이징처리 동작 - cri
 	public List<BoardVO> getListCri(Criteria cri) throws Exception;
 	
-	
+	// 총 글 개수 계산
+	public int getBoardListCount() throws Exception;
 	
 }

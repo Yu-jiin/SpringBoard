@@ -64,6 +64,11 @@ public class BoardServiceImpl implements BoardService{
 		return bdao.boardListCriSelect(cri);
 	}
 
+	@Override
+	public int getBoardListCount() throws Exception {
+		return bdao.boardListCount();
+	}
+
 	
 
 }

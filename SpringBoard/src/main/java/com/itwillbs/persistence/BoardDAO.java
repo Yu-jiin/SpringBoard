@@ -35,7 +35,8 @@ public interface BoardDAO {
 	//페이징처리 cri
 	public List<BoardVO> boardListCriSelect(Criteria cri) throws Exception;
 	
-	
+	//총 글 개수 계산
+	public int boardListCount() throws Exception;
 	
 	
 	

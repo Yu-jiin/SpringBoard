@@ -145,7 +145,7 @@ public class BoardController {
 		 */			
 			PageVO pageVO = new PageVO();
 			pageVO.setCri(cri);
-			pageVO.setTotalCount(10234);
+			pageVO.setTotalCount(bService.getBoardListCount());
 			
 			// 서비스 -> DAO 게시판 글 목록 가져오기 
 			// List<BoardVO> boardList = bService.getList(); 전체 목록 부르기
