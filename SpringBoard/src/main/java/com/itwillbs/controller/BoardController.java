@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
 import com.itwillbs.domain.Criteria;
@@ -95,41 +96,45 @@ public class BoardController {
 	
 	// 본문수정 GET /board/modify?bno=??
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void modifyGET(@RequestParam("bno") int bno, Model model) throws Exception{
+	public void modifyGET(@RequestParam("bno") int bno, Model model,Criteria cri) throws Exception{
 		logger.debug(" modifyGET() 실행 @@@@@@@@@@@@ ");
 		logger.debug(" bno : "+bno);
 		// 서비스 -> DAO 특정 글 정보 조회 동작
 		model.addAttribute(bService.read(bno));
+		model.addAttribute("cri", cri);
 		// 연결된 뷰 페이지에 전달
 	}
 	
 	
 	// 본문수정 POST 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(BoardVO vo) throws Exception{
+	public String modifyPOST(BoardVO vo,Criteria cri) throws Exception{
 		logger.debug(" modifyPOST() 실행 @@@@@@@@@@@@ ");
 		logger.debug(" BoardVO : "+vo);
 		// 서비스 -> DAO 
 		bService.modify(vo);
 		// 수정 완료 후 list로 이동 redirect
-		return "redirect:/board/listCri";
+		return "redirect:/board/listCri?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
 	}
 	
 	
 	
 	// 본문삭제 POST
 	@RequestMapping(value = "/remove", method =  RequestMethod.POST)
-	public String removePOST(BoardVO vo,@RequestParam("bno") int bno) throws Exception{
+	public String removePOST(BoardVO vo,@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) throws Exception{
 		logger.debug(" removePOST(BoardVO vo) 실행 ");
 		bService.remove(bno);
-		return "redirect:/board/list";
+		// return "redirect:/board/listCri";
+		rttr.addFlashAttribute("page", cri.getPage());
+		rttr.addFlashAttribute("pageSize", cri.getPageSize());
+		return "redirect:/board/listCri?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
 	}
 	
 	// http://localhost:8088/board/listCri
 	// http://localhost:8088/board/listCri?page=2&pageSize=20
 	// 리스트 GET : /board/listCri
 		@RequestMapping(value = "/listCri", method = RequestMethod.GET)
-		public void listCriGET(Model model, HttpSession session,Criteria cri) throws Exception{
+		public void listCriGET(Model model, HttpSession session, Criteria cri) throws Exception{
 			logger.debug(" listCriGET() 호출 ");
 			
 			// 페이징처리 객체

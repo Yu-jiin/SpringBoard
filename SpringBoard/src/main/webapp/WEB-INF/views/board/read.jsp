@@ -4,12 +4,16 @@
 
 <%@ include file="../include/header.jsp" %>
 
+cri : ${cri }
 
 <div class="content">
 <br>
 	<h1>read.jsp</h1>
 	<form role="form" action="" method="get">
 		<input type="hidden" name="bno" value="${vo.bno }">
+		<!-- 페이징처리 정보 -->
+		<input type="hidden" name="page" value="${cri.page }">
+		<input type="hidden" name="pageSize" value="${cri.pageSize }">
 	</form>
 
 <div class="box box-primary">
